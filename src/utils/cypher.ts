@@ -108,6 +108,13 @@ class Cypher {
     }
     throw new Error("AES and IV keys must be set");
   }
+  static async encryptPayload(data: string)  {
+    return CryptoJS.AES.encrypt(data, AES_REQ_RES_KEY || "").toString();
+  };
+  static async decryptRequest(data: string) {
+    return CryptoJS.AES.decrypt(data, AES_REQ_RES_KEY || "").toString(CryptoJS.enc.Utf8 );
+  };
+
 }
 
 export default Cypher;

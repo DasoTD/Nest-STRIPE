@@ -70,7 +70,7 @@ export const logger = (callingModule: Module) =>
       new transports.Console(),
       new transports.File({
         filename: getFile('info'),
-        level: 'info',
+        level: 'log',
       }),
       new transports.File({
         filename: getFile('error'),
