@@ -7,6 +7,7 @@ import { WinstonModule } from 'nest-winston';
 import { configSchemaValidation } from './utils/config.schema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatModule } from './cat/cat.module';
+import { UtilitiesModule } from './utilities/utilities.module';
 
 @Module({
   imports: [ ConfigModule.forRoot({
@@ -36,6 +37,7 @@ import { CatModule } from './cat/cat.module';
       synchronize: true,
     }),
     CatModule,
+    UtilitiesModule,
 ],
   controllers: [AppController],
   providers: [AppService],

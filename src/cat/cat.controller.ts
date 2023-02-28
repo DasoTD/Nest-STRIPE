@@ -1,15 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
 import { CatService } from './cat.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { Response } from 'express';
+import { createResponse, HttpStatusCode, ResponseMessage, ResponseStatus } from 'src/utils/apiResponse';
 
 @Controller('cat')
 export class CatController {
   constructor(private readonly catService: CatService) {}
 
+  // adminResponseLogger(module).info(
+  //   `createAdmin request by ${req.user.Username}: {users:${JSON.stringify(
+  //     users
+  //   )}, roleId: ${roleId}}`
+  // );
+
+  // return createAdminResponse(
+  //   res,
+  //   HttpStatusCode.StatusCreated,
+  //   ResponseStatus.Success,
+  //   response
+  // );
+
   @Post()
-  create(@Body() createCatDto: CreateCatDto) {
-    return this.catService.create(createCatDto);
+  create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
+   let response = this.catService.create(createCatDto);
+    return createResponse(
+      res,
+      HttpStatusCode.StatusCreated,
+      ResponseStatus.Success,
+      response
+    )
   }
 
   @Get()

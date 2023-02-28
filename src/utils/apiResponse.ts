@@ -1,8 +1,9 @@
 const { NODE_ENV } = require("../config");
-const { encryptResponse, logger } = require("../utils");
+const {  logger } = require("../utils");
+import encryptResponse from "./encryption";
 const { responseLogger, adminResponseLogger } = require("./logger");
 
-const HttpStatusCode = {
+export const HttpStatusCode = {
   StatusOk: 200,
   StatusCreated: 201,
   StatusBadRequest: 400,
@@ -13,14 +14,14 @@ const HttpStatusCode = {
   StatusForbidden: 403,
 };
 
-const ResponseStatus = {
+export const ResponseStatus = {
   Success: "success",
   Failure: "fail",
   Error: "error",
 };
 
-const ResponseMessage = {
-  HealthCheckMessage: "Welcome to the iCoin Server!",
+export const ResponseMessage = {
+  HealthCheckMessage: "Welcome to the Nest Stripe Server!",
   NotFoundMessage: "Not Found!",
 };
 
