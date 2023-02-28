@@ -2,10 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res, HttpExcept
 import { UtilitiesService } from './utilities.service';
 import { CreateUtilityDto } from './dto/create-utility.dto';
 import { UpdateUtilityDto } from './dto/update-utility.dto';
-import encryptResponse from 'src/utils/encryption';
+import encryptResponse, { encryptPayload, decryptRequest } from 'src/utils/encryption';
 // import decryptRequest from '/src/utils/decryption';
 import { Request, Response } from 'express';
-import decryptRequest from 'src/utils/decryption';
+// import decryptRequest from 'src/utils/decryption';
 import Cypher from 'src/utils/cypher';
 
 @Controller('utilities')
@@ -32,7 +32,9 @@ export class UtilitiesController {
   @Post('encrypt')
   async encrypt(@Body() data: string, @Res() res: Response){
     try {
-      const encrypt = await encryptResponse(JSON.stringify(data));
+      console.log(data)
+      const encrypt = await encryptPayload(JSON.stringify(data));
+      // const encrypt = await encryptResponse(JSON.stringify(data));
       return res.json(encrypt)
       
     } catch (error) {
@@ -50,10 +52,11 @@ export class UtilitiesController {
   @Post('decrypt')
   async decrypt(@Body() data: string, @Res() res: Response, @Req() req:Request){
     try {
-      const decrypted = await Cypher.cryptoJSDecrypt(data);
-      return res.json(decrypted);
-      // const decrypt = await decryptRequest(data);
-      // const json = JSON.parse(decrypt);
+      console.log(req.body)
+      const decrypted = await decryptRequest(req.body.data);
+      return res.json(JSON.parse(decrypted));
+      // const decrypt = await decryptRequest(JSON.stringify(data));
+      // const json = JSON.stringify(decrypt);
       // return res.json(json);
       // return res.json(decrypt)
       
