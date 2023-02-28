@@ -80,4 +80,4 @@ export const logger = (callingModule: Module) =>
     exitOnError: false,
   });
 
-export default logger;
+// export default logger;
