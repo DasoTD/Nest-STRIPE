@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import Cypher from "../utils/cypher";
 import { logger } from "./logger";
 
-dotenv.config();
+// dotenv.config();
 
 const handleResponse = async (
   req: Request,

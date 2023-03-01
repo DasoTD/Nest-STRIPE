@@ -1,6 +1,7 @@
 const { NODE_ENV } = require("../config");
 const {  logger } = require("../utils");
-import encryptResponse from "./encryption";
+// import encryptResponse from "./encryption";
+import { encryptPayload } from "./encryption";
 const { responseLogger, adminResponseLogger } = require("./logger");
 
 export const HttpStatusCode = {
@@ -55,7 +56,7 @@ export const createResponse = async (res, httpStatusCode, responseStatus, data) 
     // logger(module).info(JSON.stringify(responseObject));
   }
   if (NODE_ENV === "dev") console.log(JSON.stringify(responseObject));
-  const response = await encryptResponse(JSON.stringify(responseObject));
+  const response = await encryptPayload(JSON.stringify(responseObject));
   return res.status(httpStatusCode).json({ response });
 };
 
@@ -86,7 +87,7 @@ const createAdminResponse = async (
     // logger(module).info(JSON.stringify(responseObject));
   }
   if (NODE_ENV === "dev") console.log(JSON.stringify(responseObject));
-  const response = await encryptResponse(JSON.stringify(responseObject));
+  const response = await encryptPayload(JSON.stringify(responseObject));
   return res.status(httpStatusCode).json({ response });
 };
 

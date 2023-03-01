@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import mongoose, { HydratedDocument } from 'mongoose';
+import { CreateDateColumn } from 'typeorm';
 
 // import { Owner } from '../owners/schemas/owner.schema';
 
@@ -16,6 +17,9 @@ export class Cat {
 
   @Prop()
   breed: string;
+
+  // @Prop({ type: Date, required: true })
+  // time: Date;
 
   @Prop([String])
   tags: string[]

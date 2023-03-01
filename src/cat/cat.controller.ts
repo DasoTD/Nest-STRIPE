@@ -23,8 +23,8 @@ export class CatController {
   // );
 
   @Post()
-  create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
-   let response = this.catService.create(createCatDto);
+  async create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
+   let response = await this.catService.create(createCatDto);
     return createResponse(
       res,
       HttpStatusCode.StatusCreated,
@@ -32,6 +32,24 @@ export class CatController {
       response
     )
   }
+
+  // try {
+  //   let response = this.catService.create(createCatDto);
+  //   return handleResponse(
+  //     req,
+  //     res,
+  //     {
+  //       response,
+  //       // ResponseStatus.Success,
+  //     },
+  //     HttpStatusCode.StatusCreated,
+      
+  //   )
+  //  } catch (error) {
+  //   console.log(error.message)
+  //  }
+  // }
+
 
   @Get()
   findAll() {
