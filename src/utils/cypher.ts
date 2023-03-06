@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import * as cryptoJS from "crypto-js";
+import * as CryptoJS from "crypto-js";
 
 // import dotenv from "dotenv";
 
@@ -88,9 +88,9 @@ class Cypher {
 
   static async cryptoJSEncrypt(payload: string) {
     if (AES_REQ_RES_KEY && AES_REQ_RES_IV){
-      const key = cryptoJS.enc.Hex.parse(AES_REQ_RES_KEY);
-      const iv = cryptoJS.enc.Hex.parse(AES_REQ_RES_IV);
-      return cryptoJS.AES.encrypt(payload, key, {
+      const key = CryptoJS.enc.Hex.parse(AES_REQ_RES_KEY);
+      const iv = CryptoJS.enc.Hex.parse(AES_REQ_RES_IV);
+      return CryptoJS.AES.encrypt(payload, key, {
         iv,
       }).toString();
     }
@@ -99,11 +99,11 @@ class Cypher {
 
   static async cryptoJSDecrypt(text: string) {
     if (AES_REQ_RES_KEY && AES_REQ_RES_IV) {
-      const key = cryptoJS.enc.Hex.parse(AES_REQ_RES_KEY);
-      const iv = cryptoJS.enc.Hex.parse(AES_REQ_RES_IV);
-      const decryptedData = cryptoJS.AES.decrypt(text, key, {
+      const key = CryptoJS.enc.Hex.parse(AES_REQ_RES_KEY);
+      const iv = CryptoJS.enc.Hex.parse(AES_REQ_RES_IV);
+      const decryptedData = CryptoJS.AES.decrypt(text, key, {
         iv,
-      }).toString(cryptoJS.enc.Utf8);
+      }).toString(CryptoJS.enc.Utf8);
       return decryptedData;
     }
     throw new Error("AES and IV keys must be set");

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,6 +8,7 @@ import { configSchemaValidation } from './utils/config.schema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatModule } from './cat/cat.module';
 import { UtilitiesModule } from './utilities/utilities.module';
+import { MyMiddleware } from './utils/request';
 
 @Module({
   imports: [ ConfigModule.forRoot({
@@ -43,4 +44,12 @@ import { UtilitiesModule } from './utilities/utilities.module';
   providers: [AppService],
 })
 export class AppModule {}
+
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer
+//       .apply(MyMiddleware)
+//       .forRoutes('*');
+//   }
+// }
 

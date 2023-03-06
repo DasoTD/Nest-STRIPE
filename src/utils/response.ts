@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 // import dotenv from "dotenv";
 import Cypher from "../utils/cypher";
+import { encryptPayload } from "./encryption";
 import { logger } from "./logger";
 
 // dotenv.config();
