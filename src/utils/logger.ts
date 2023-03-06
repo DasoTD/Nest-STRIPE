@@ -1,9 +1,9 @@
 import { NestjsWinstonLoggerService } from 'nestjs-winston-logger';
  //import { format, transports } from "winston";
 import { createLogger, format, transports } from 'winston';
-import rTracer from 'cls-rtracer';
-import path from 'path';
-import fs from 'fs';
+import * as rTracer from 'cls-rtracer';
+import * as fs from 'fs';
+import * as path from 'path';
 import Module from 'module';
 //const debug = require('node-forge/lib/debug');
 

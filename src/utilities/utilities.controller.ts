@@ -30,9 +30,9 @@ export class UtilitiesController {
   //   }
 
   @Post('encrypt')
-  async encrypt(@Body() data: string, @Res() res: Response){
+  async encrypt(@Body() data: string, @Req() req: Request, @Res() res: Response){
     try {
-      console.log(data)
+      console.log(`${req.protocol}://${req.get('Host')}${req.originalUrl}`);
       const encrypt = await encryptPayload(JSON.stringify(data));
       // const encrypt = await encryptResponse(JSON.stringify(data));
       return res.json(encrypt)
@@ -52,7 +52,7 @@ export class UtilitiesController {
   @Post('decrypt')
   async decrypt(@Body() data: string, @Res() res: Response, @Req() req:Request){
     try {
-      console.log(req.body)
+      console.log(`${req.originalUrl}`);
       const decrypted = await decryptRequest(req.body.data);
       return res.json(JSON.parse(decrypted));
       // const decrypt = await decryptRequest(JSON.stringify(data));

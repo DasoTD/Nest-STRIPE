@@ -12,6 +12,7 @@ export class MyMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     try {
       if (!["POST", "PUT", "PATCH"].includes(req.method)) return next();
+      if(("/utilitity").includes(req.path)) return next();
     if (!req.body.data)
       return handleResponse(
         req,
@@ -32,7 +33,7 @@ export class MyMiddleware implements NestMiddleware {
     logger(module).log(
       `${req.method} - ${req.ip}- ${req.originalUrl} - ${JSON.stringify(requestBody)}`
     );
-    console.log('Middleware is running...');
+    
     return next();
   
     } catch (error) {

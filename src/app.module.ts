@@ -43,13 +43,12 @@ import { MyMiddleware } from './utils/request';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
 
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer
-//       .apply(MyMiddleware)
-//       .forRoutes('*');
-//   }
-// }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(MyMiddleware)
+      .forRoutes('*');
+  }
+}
 
