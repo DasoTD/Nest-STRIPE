@@ -9,6 +9,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatModule } from './cat/cat.module';
 import { UtilitiesModule } from './utilities/utilities.module';
 import { MyMiddleware } from './utils/request';
+import { OrderModule } from './order/order.module';
+import { CartModule } from './cart/cart.module';
+import { UserModule } from './user/user.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [ ConfigModule.forRoot({
@@ -39,6 +43,10 @@ import { MyMiddleware } from './utils/request';
     }),
     CatModule,
     UtilitiesModule,
+    OrderModule,
+    CartModule,
+    UserModule,
+    ProductModule,
 ],
   controllers: [AppController],
   providers: [AppService],
