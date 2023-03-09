@@ -15,6 +15,7 @@ import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmExModule } from './database/typeorm-ex.module';
+import { UserRepository } from './auth/user.repository';
 
 @Module({
   imports: [ ConfigModule.forRoot({
@@ -43,7 +44,7 @@ import { TypeOrmExModule } from './database/typeorm-ex.module';
       // https://typeorm.io/#/migrations
       synchronize: true,
     }),
-    TypeOrmExModule.forCustomRepository([PhotoRepository]),
+    TypeOrmExModule.forCustomRepository([UserRepository]),
     CatModule,
     UtilitiesModule,
     OrderModule,
