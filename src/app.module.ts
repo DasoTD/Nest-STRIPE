@@ -13,6 +13,8 @@ import { OrderModule } from './order/order.module';
 import { CartModule } from './cart/cart.module';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
+import { AuthModule } from './auth/auth.module';
+import { TypeOrmExModule } from './database/typeorm-ex.module';
 
 @Module({
   imports: [ ConfigModule.forRoot({
@@ -41,12 +43,14 @@ import { ProductModule } from './product/product.module';
       // https://typeorm.io/#/migrations
       synchronize: true,
     }),
+    TypeOrmExModule.forCustomRepository([PhotoRepository]),
     CatModule,
     UtilitiesModule,
     OrderModule,
     CartModule,
     UserModule,
     ProductModule,
+    AuthModule,
 ],
   controllers: [AppController],
   providers: [AppService],
