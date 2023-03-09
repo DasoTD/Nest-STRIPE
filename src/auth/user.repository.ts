@@ -3,7 +3,7 @@ import { ConflictException, InternalServerErrorException } from '@nestjs/common'
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { User } from './entities/auth.entity';
-import * as brcypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { CustomRepository } from 'src/database/typeorm-ex.decorator';
 
 // @CustomRepository(Photo)
@@ -21,8 +21,8 @@ export class UserRepository extends Repository<User> {
         try {
             const { username, password } = createAuthDto;
 
-            const salt = await brcypt.genSalt()
-            const hash = await brcypt.hash(password, salt);
+            const salt = await bcrypt.genSalt()
+            const hash = await bcrypt.hash(password, salt);
             const user =  this.create({username, password: hash})
             await this.save(user);
             return user;

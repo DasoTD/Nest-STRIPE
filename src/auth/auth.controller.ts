@@ -1,15 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { User } from './entities/auth.entity';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
+  create(@Body() createAuthDto: CreateAuthDto): Promise<User> {
     return this.authService.create(createAuthDto);
+  }
+
+  
+  @HttpCode(HttpStatus.OK)
+  @Post('login')
+  login(@Body() createAuthDto: CreateAuthDto): Promise<{ access_token: string }>{
+    return this.login(createAuthDto)
   }
 
   @Get()
