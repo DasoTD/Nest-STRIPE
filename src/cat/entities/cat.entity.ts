@@ -1,9 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import mongoose, { HydratedDocument } from 'mongoose';
-import { CreateDateColumn } from 'typeorm';
-
-// import { Owner } from '../owners/schemas/owner.schema';
+import  { HydratedDocument } from 'mongoose';
 
 export type CatDocument = HydratedDocument<Cat>;
 
@@ -35,4 +32,51 @@ export class Cat {
 }
 
 export const CatSchema = SchemaFactory.createForClass(Cat);
+
+export class Auth {}
+import {Column, Entity, PrimaryGeneratedColumn, Unique} from 'typeorm';
+
+// @Entity()
+// export class Cat {
+//     @PrimaryGeneratedColumn('uuid')
+//     id: string;
+
+//     @Column({unique: true})
+//     // @Unique()
+//     name: string;
+
+//     // @Column()
+//     // firstname: string;
+
+//     // @Column()
+//     // lastname: string;
+
+//     // @Column({unique: true})
+//     // email: string;
+
+//     @Column()
+//     age: number;
+
+//     @Column()
+//     breed: string;
+
+
+//     @Column()
+//     tags: string;
+
+//     // @Column()
+//     // address: string;
+
+//     // @Column()
+//     // gender: string;
+
+//     // @Column()
+//     // profilePicture: string;
+
+//     // @Column({unique: true})
+//     // phoneNumber: string;
+
+//     // @Column()
+//     // lastLogin: Date;
+// }
 

@@ -12,6 +12,7 @@ import {
  } from 'nestjs-winston-logger';
  import { format, transports } from "winston";
 import { formatDate } from './utils/loggerMethod';
+import { TransformInterceptor } from './transform.interceptor';
 
  const d = formatDate();
  const globalLogger = new NestjsWinstonLoggerService({
@@ -36,6 +37,7 @@ async function bootstrap() {
   app.use(morganRequestLogger(globalLogger));
   app.use(morganResponseLogger(globalLogger))
   app.useGlobalInterceptors(new LoggingInterceptor(globalLogger));
+  app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true
   }));

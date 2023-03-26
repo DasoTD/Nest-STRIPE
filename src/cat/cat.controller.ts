@@ -23,8 +23,10 @@ export class CatController {
   // );
 
   @Post()
-  async create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
-   let response = await this.catService.create(createCatDto);
+  async createCat(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
+    // const {name, age, breed,tags} = createCatDto
+   let response = await this.catService.createCat(createCatDto);
+   return response;
     return createResponse(
       res,
       HttpStatusCode.StatusCreated,

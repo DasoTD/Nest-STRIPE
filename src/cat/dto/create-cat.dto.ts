@@ -1,7 +1,7 @@
 import { IsNumber, IsString, Length, Matches } from 'class-validator';
 
 export class CreateCatDto {
-  @IsString()
+  // @IsString()
   // @Length(4, 20)
   name: string;
 
@@ -12,13 +12,13 @@ export class CreateCatDto {
   // // })
   // password: string;
 
-  @IsString()
+  // @IsString()
   breed: string
 
-  @IsNumber()
+  // @IsNumber()
   age: number
 
-  @IsString()
+  // @IsString()
   tags: string
 }
 

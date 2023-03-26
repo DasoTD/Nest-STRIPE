@@ -2,7 +2,7 @@ import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { configSchemaValidation } from './utils/config.schema';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -15,7 +15,8 @@ import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmExModule } from './database/typeorm-ex.module';
-import { UserRepository } from './auth/user.repository';
+// import { UserRepository } from './auth/user.repository';
+// import { CatRepository } from './cat/cat.repository';
 
 @Module({
   imports: [ ConfigModule.forRoot({
@@ -25,26 +26,41 @@ import { UserRepository } from './auth/user.repository';
   }),
     MongooseModule.forRoot(process.env.MONGO_URL),
     WinstonModule.forRoot({}),
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //   useFactory: async (configService: ConfigService) => {
+    //     const isProduction = configService.get('STAGE') === 'prod';
+    //     return {
+    //       ssl: isProduction,
+    //       extra: {
+    //         ssl: isProduction ? { rejectUnauthorized: false } : null,
+    //       },
+    //       type: 'postgres',
+    //       logNotifications: true,
+    //       autoLoadEntities: true,
+    //       synchronize: true,
+    //       host: configService.get('DB_HOST'),
+    //       port: configService.get('DB_PORT'),
+    //       username: configService.get('DB_USERNAME'),
+    //       password: configService.get('DB_PASSWORD'),
+    //       database: configService.get('DB_DATABASE'),
+    //     };
+    //   },
+    // }),
+    
     TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: process.env.MONGO_URL,
-      // host: process.env.DB_HOST,
-      // port: parseInt(process.env.DB_PORT),
-      // username: process.env.DB_USERNAME,
-      // password: process.env.DB_PASSWORD,
-      // database: process.env.DB_DATABASE,
-      ssl: true,
-      "useNewUrlParser": true,
-      // "synchronize": true,
-      "logging": true,
-      // "entities": ["src/entity/*.*"],
+      type: 'postgres',
+      logNotifications: true,
       autoLoadEntities: true,
-      // Only enable this option if your application is in development,
-      // otherwise use TypeORM migrations to sync entity schemas:
-      // https://typeorm.io/#/migrations
       synchronize: true,
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
     }),
-    TypeOrmExModule.forCustomRepository([UserRepository]),
+    // TypeOrmExModule.forCustomRepository([UserRepository, CatRepository]),
     CatModule,
     UtilitiesModule,
     OrderModule,

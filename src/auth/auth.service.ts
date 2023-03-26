@@ -11,12 +11,15 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
+    @InjectRepository(UserRepository)
     private userRepo: UserRepository,
     private jwt: JwtService,
     private config: ConfigService,){}
+
   async create(createAuthDto: CreateAuthDto): Promise<User> {
-    const {username, password} = createAuthDto
-    const user =await this.userRepo.createUser(createAuthDto)
+    console.log("a")
+    const user = await this.userRepo.createUser(createAuthDto)
+    console.log('b')
     return user; //'This action adds a new auth';
   }
 

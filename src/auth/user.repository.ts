@@ -6,24 +6,18 @@ import { User } from './entities/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { CustomRepository } from 'src/database/typeorm-ex.decorator';
 
-// @CustomRepository(Photo)
-// export class PhotoRepository extends Repository<Photo> {
-//     public async getAllPhoto() {
-//         const query = this.createQueryBuilder('photo')
-//             .where('photo.isPublished = :isPublished', { isPublished: true })
-//         const photos = await query.getMany()
-//         return photos
-//     }
-// }
 @CustomRepository(User)
 export class UserRepository extends Repository<User> {
     async createUser(createAuthDto : CreateAuthDto): Promise<User> {
         try {
             const { username, password } = createAuthDto;
-
+            console.log("ad")
             const salt = await bcrypt.genSalt()
+            console.log(password, username)
             const hash = await bcrypt.hash(password, salt);
+            console.log("daso")
             const user =  this.create({username, password: hash})
+            console.log("daso")
             await this.save(user);
             return user;
         } catch (error: any) {
